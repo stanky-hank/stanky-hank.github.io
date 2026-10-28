@@ -1,0 +1,19 @@
+# --- Site basics ---
+title: stankyHank
+tagline: security notes & writeups
+description: >-
+  Security writeups, CVE breakdowns, and notes from the lab.
+author: stankyHank            # change to "Charles Leonard" here if you ever want the real name on bylines
+
+# --- Theme (GitHub Pages builds this for you — no Ruby needed locally) ---
+theme: minima
+
+# --- Build settings ---
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
+
+# --- Footer link (shows a GitHub icon pointing at your profile) ---
+github_username: stanky-hank
+
+minima:
+  date_format: "%b %-d, %Y"
