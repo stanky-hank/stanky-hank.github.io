@@ -1,19 +1,58 @@
 # --- Site basics ---
 title: stankyHank
-tagline: security notes & writeups
+name: stankyHank
 description: >-
   Security writeups, CVE breakdowns, and notes from the lab.
-author: stankyHank            # change to "Charles Leonard" here if you ever want the real name on bylines
+url: "https://stanky-hank.github.io"
+# baseurl stays empty — this is a user site (stanky-hank.github.io)
 
-# --- Theme (GitHub Pages builds this for you — no Ruby needed locally) ---
-theme: minima
+# --- Theme: Minimal Mistakes (the standard polished Jekyll blog theme) ---
+remote_theme: "mmistakes/minimal-mistakes@4.26.2"
+minimal_mistakes_skin: "dark"   # swap anytime: default, air, aqua, contrast, dark, dirt, mint, neon, plum, sunrise
 
-# --- Build settings ---
+# --- Plugins (all supported natively by GitHub Pages) ---
+plugins:
+  - jekyll-include-cache
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-feed
+
+# --- Build / reading ---
 markdown: kramdown
-permalink: /:year/:month/:day/:title/
+paginate: 5
+paginate_path: /page:num/
 
-# --- Footer link (shows a GitHub icon pointing at your profile) ---
-github_username: stanky-hank
+# --- Author (shows in the sidebar next to posts) ---
+author:
+  name: "stankyHank"
+  bio: "Dev turning red-teamer. Security writeups & lab notes."
+  # avatar: "/assets/images/avatar.png"   # drop your shepherd avatar at that path and uncomment this
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/stanky-hank"
 
-minima:
-  date_format: "%b %-d, %Y"
+# --- Footer ---
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/stanky-hank"
+
+# --- Defaults: auto-apply the nice layout so you never set it per-post ---
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      show_date: true
+      related: true
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true

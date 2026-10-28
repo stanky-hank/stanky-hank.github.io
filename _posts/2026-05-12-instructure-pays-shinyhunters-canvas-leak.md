@@ -1,8 +1,9 @@
 ---
-layout: post
 title: "Instructure Pays ShinyHunters to Stop a 3.65TB Canvas Leak"
 date: 2026-05-12
+categories: [breaches]
 tags: [breach, ransomware, data-exfiltration]
+excerpt: "275 million records walked out the door, and the 'proof of deletion' is worth nothing."
 ---
 
 Instructure — the parent company of Canvas LMS — was breached by ShinyHunters and paid a ransom to stop the publication of 3.65TB of stolen data. It's a textbook case of what "we'll handle security later" actually costs, so it's worth walking through.
