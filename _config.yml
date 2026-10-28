@@ -4,7 +4,7 @@ name: stankyHank
 description: >-
   Security writeups, CVE breakdowns, and notes from the lab.
 url: "https://stanky-hank.github.io"
-# baseurl stays empty — this is a user site (stanky-hank.github.io)
+# baseurl stays empty: this is a user site (stanky-hank.github.io)
 
 # --- Theme: Minimal Mistakes (the standard polished Jekyll blog theme) ---
 remote_theme: "mmistakes/minimal-mistakes@4.26.2"
