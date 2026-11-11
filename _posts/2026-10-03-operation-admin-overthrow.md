@@ -1,5 +1,5 @@
 ---
-title: "Operation Admin Overthrow: How I Took 1st at a BSides CTF Without Exploiting Anything"
+title: "Operation Admin Overthrow: How I Took 1st at a BSides OSINT CTF"
 date: 2026-10-03
 categories: [ctf]
 tags: [ctf, osint, web, writeup]
@@ -30,9 +30,9 @@ Nothing here needed an exploit. Every secret was sitting somewhere the client co
 
 A physical IBM 80-column card. Standard Hollerith encoding: one character per column, two zone rows up top plus rows 0-9. One hole in a column is a digit; two holes is a letter.
 
-#### Decoding Hollerith by hand
+#### Decoding the Hollerith
 
-Zone punch picks the letter group, digit punch picks the position in it:
+Here is how the encoding works: the zone punch picks the letter group, the digit punch picks the position in it.
 
 | Upper (zone) hole | + lower hole 1-9 → |
 |-------------------|--------------------|
@@ -40,7 +40,7 @@ Zone punch picks the letter group, digit punch picks the position in it:
 | 2nd row           | J-R |
 | row 0             | S-Z (digits 2-9) |
 
-Read columns 1-72 off the card by eye. Output was all caps, digits 2-7, trailing `====`. That alphabet + that padding is **base32** wearing a trench coat. Learn to spot it on sight; it shows up twice in this CTF.
+I handed the card to an AI assistant and had it read the 72 columns (disclosed, see the note at the end). The output came back all caps, digits 2-7, trailing `====`. That alphabet plus that padding is **base32** wearing a trench coat; learn to spot it on sight, it shows up twice in this CTF. The decode wasn't a leap of faith either: run it through base32 and it produced a clean, valid URL, and the same card's holes later lined up as a Cardan grille in challenge 2. A wrong decode would have failed both.
 
 ```bash
 echo 'NB2HI4DTHIXS633WMVZHI2DSN53S433TORZGSY3INRQWELTJN4XXO33SMRZWKYLSMNUA====' \
@@ -166,10 +166,6 @@ Every secret in this CTF was reachable without breaking a single thing. That's n
 
 ### On using a tool to win
 
-I used an AI assistant to decode the encodings fast. I disclosed it to the organizers at submission. I took 1st anyway, and there's no asterisk on that.
+I used an AI assistant to decode the encodings (Hollerith, base32) and disclosed it to the organizers at submission. The OSINT, the wrong-map correction, and the decision of what to submit at each step were mine. The tool was fast at the mechanical decoding; recognizing what the puzzles were and doing the legwork was the actual challenge.
 
-The objective was to capture the flag, and I captured it. An attacker uses whatever gets them in; that's the entire premise of the exercise, not a loophole in it. The tool decoded Hollerith and base32 in seconds, but the judgment calls, the Street View legwork, the wrong-map correction, and every single submission were mine. That's how real engagements run, too: you reach for the fastest thing that works, you document what you used, and you keep moving.
-
-Here's the part I'll stand on: **everyone in that room could have done exactly what I did.** The encodings were recognizable. The `LOC` record was there for anyone who thought to query it. The JSON was sitting in the browser for every competitor who loaded the page. None of it was hidden from them.
-
-I'm the one who saw it and did it. That's the whole difference, and I'll take it.
+That's how I'd work a real engagement: reach for the fastest tool that does the job, and document what you used. Encoding is not encryption, and a flag you can reach with a decoder was never protected to begin with.

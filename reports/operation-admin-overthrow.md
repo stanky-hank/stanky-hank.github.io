@@ -62,13 +62,13 @@ toc_sticky: true
 
 ## Finding Severity Ratings
 
-| Severity | CVSS v3 Range | Definition |
-|---|---|---|
-| Critical | 9.0-10.0 | Exploitation is straightforward and usually results in system-level compromise. Patch immediately. |
-| High | 7.0-8.9 | Exploitation is more difficult but could cause elevated privileges, data loss, or downtime. Patch ASAP. |
-| Moderate | 4.0-6.9 | Vulnerabilities exist but aren't directly exploitable or require extra steps. Patch after high-priority items. |
-| Low | 0.1-3.9 | Non-exploitable, but reduces attack surface. Patch during next maintenance window. |
-| Informational | N/A | No vulnerability. Notes on items observed, strong controls, or documentation. |
+| Severity | Definition |
+|---|---|
+| Critical | Exploitation is straightforward and usually results in system-level compromise. Patch immediately. |
+| High | Exploitation is more difficult but could cause elevated privileges, data loss, or downtime. Patch ASAP. |
+| Moderate | Vulnerabilities exist but aren't directly exploitable or require extra steps. Patch after high-priority items. |
+| Low | Non-exploitable, but reduces attack surface. Patch during next maintenance window. |
+| Informational | No vulnerability. Notes on items observed, strong controls, or documentation. |
 
 ---
 
@@ -116,12 +116,12 @@ The most serious issue (Finding F-01) is a textbook client-side authentication f
 
 ## Vulnerability Summary & Report Card
 
-Critical: **1**  High: **0**  Moderate: **1**  Low: **2**  Informational: **0**
+Critical: **1**  High: **0**  Moderate: **0**  Low: **3**  Informational: **0**
 
 | Finding | Severity | Recommendation |
 |---|---|---|
 | F-01 Client-Side Authentication & Hardcoded Credentials | Critical | Perform all authentication server-side; never ship secrets to the client |
-| F-02 Sensitive Information Disclosure via DNS `LOC` Record | Moderate | Remove sensitive data from public DNS; audit all record types |
+| F-02 Sensitive Information Disclosure via DNS `LOC` Record | Low | Remove sensitive data from public DNS; audit all record types |
 | F-03 Security Through Obscurity (Encoding as Access Control) | Low | Protect sensitive paths with authentication, not reversible encoding |
 | F-04 Missing Rate Limiting / Lockout on Auth Endpoints | Low | Throttle and lock out repeated failed authentication attempts |
 
@@ -160,13 +160,13 @@ curl -s https://overthrow.ostrichlab.io/prisoner_data.json \
 
 ---
 
-### Finding F-02: Sensitive Information Disclosure via DNS `LOC` Record (Moderate)
+### Finding F-02: Sensitive Information Disclosure via DNS `LOC` Record (Low)
 
 | Field | Value |
 |---|---|
 | **Description** | The "Rescue Recon" login (`/GEOSINTCYOPS`) hints at "LOCation." The host `geo1.overthrow.ostrichlab.io` publishes a DNS `LOC` record (RFC 1876) containing precise physical coordinates. `LOC` is a rarely-inspected record type, but it is fully public. The coordinates (`41.946083, -70.956361`) resolve to a real location (Old Colony Correctional Center, Bridgewater MA), which seeds the next stage's OSINT. |
-| **Risk: Likelihood** | Moderate. Trivial to retrieve for anyone who thinks to query it (`dig LOC`), but most attackers only check `A`/`TXT` records, so it hides in plain sight. |
-| **Risk: Impact** | Moderate. Information disclosure. In a real engagement, geolocation or other data planted in obscure DNS records can expose physical sites, internal naming, or infrastructure the owner assumed was private. |
+| **Risk: Likelihood** | Low. Trivial to retrieve for anyone who thinks to query it (`dig LOC`), but most attackers only check `A`/`TXT` records, so it hides in plain sight. In this CTF the data was deliberately planted to be found. |
+| **Risk: Impact** | Low. Information disclosure only. In a real engagement, geolocation or other data planted in obscure DNS records could expose physical sites, internal naming, or infrastructure the owner assumed was private; here it was intentionally published for the challenge. |
 | **System(s)** | `geo1.overthrow.ostrichlab.io` (DNS) |
 | **Tools Used** | `dig` |
 | **References** | OWASP A01:2021 / Information Disclosure; CWE-200 Exposure of Sensitive Information |
